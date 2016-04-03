@@ -1,35 +1,24 @@
 <div class="well">
-    <h2 class="page-header">Manage Posts <a href="new.html" class="btn btn-success">Add New</a></h2>
+    <h2 class="page-header">Posts <%= link_to "Create New", new_admin_post_path, class: 'btn btn-success pull-right' %></h2>
+    <% if @posts.exists? %>
     <table class="table table-striped">
         <tr>
             <th>Post Title</th>
             <th>Post Category</th>
+            <th>Date Created</th>
             <th>Actions</th>
         </tr>
+        <% @posts.each do |post| %>
         <tr>
-            <td>Post 1</td>
-            <td>News</td>
-            <td><a href="#" class="btn btn-primary">Edit</a><a href="#" class="btn btn-danger">Delete</a></td>
+            <td><%= post.title %></td>
+            <td><%= post.category.name %></td>
+            <td><%= post.created_at.to_time.strftime('%B %e, %l:%M %p') %></td>
+            <td><%= link_to "Edit", edit_admin_post_path(post), class:'btn btn-primary' %>
+            <%= link_to "Delete", admin_post_path(post), class:'btn btn-danger', method: :delete, data: {confirm: 'Are you sure?'} %></td>
         </tr>
-        <tr>
-            <td>Post 2</td>
-            <td>News</td>
-            <td><a href="#" class="btn btn-primary">Edit</a><a href="#" class="btn btn-danger">Delete</a></td>
-        </tr>
-        <tr>
-            <td>Post 3</td>
-            <td>News</td>
-            <td><a href="#" class="btn btn-primary">Edit</a><a href="#" class="btn btn-danger">Delete</a></td>
-        </tr>
-        <thead>
-            <tr>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td></td>
-            </tr>
-        </tbody>
+        <% end %>
     </table>
+    <% else %>
+    <p>There are no posts</p>
+    <% end %>
     </div>
