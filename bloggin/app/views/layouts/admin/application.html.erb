@@ -38,12 +38,9 @@ this is the BACKEND
                     <li class="<%= params[:controller] == 'admin/categories' ? 'active' : '' %>"><%= link_to "Categories", admin_categories_path %></li>
                     <li class="<%= params[:controller] == 'admin/users' ? 'active' : '' %>"><%= link_to "Users", admin_users_path %></li>
                 </ul>
-                <form class="search-form navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+
+            <%= render 'partials/admin/search' %>
+            
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -73,18 +70,7 @@ this is the BACKEND
             </div>
     </section>
     <footer>
-        <p>Copyright &copy; 2016, Bloggin | <a href="../login.html">Admin Login</p>
+        <p>Copyright &copy; 2016, Bloggin | <%= link_to "Frontend", root_path, target:'_blank' %></p>
     </footer>
-    <!-- /.container -->
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>
-    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
-    </script>
-    <script src="js/bootstrap.js"></script>
-
-
 </body>
 </html>

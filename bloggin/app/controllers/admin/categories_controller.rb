@@ -36,13 +36,16 @@ class Admin::CategoriesController < Admin::ApplicationController
   end
 
   def index
-    @categories = Category.all
+    if params[:search]
+      @categories = Category.search(params[:search]).all.order('created_at DESC').paginate(:per_page => 2, :page => params[:page])
+    else
+      @categories = Category.all.order('created_at DESC').paginate(:per_page => 2, :page => params[:page])
+    end
   end
 
 
   private
-    def category_params
-      params.require(:category).permit(:name)
-    end
+  def category_params
+    params.require(:category).permit(:name)
+  end
 end
-

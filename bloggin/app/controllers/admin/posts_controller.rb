@@ -1,11 +1,16 @@
 class Admin::PostsController < Admin::ApplicationController
-    def new
+  def new
     @page_title = 'Add Post'
     @post = Post.new
   end
 
   def create
     @post = Post.new(post_params)
+
+    if params[:post][:image].blank?
+      @post.image = nil
+    end
+
     if @post.save
       flash[:notice] = 'Post Created'
       redirect_to admin_posts_path
@@ -20,6 +25,11 @@ class Admin::PostsController < Admin::ApplicationController
 
   def update
     @post = Post.find(params[:id])
+
+    if params[:post][:image].blank?
+      @post.image = nil
+    end
+
     if @post.update(post_params)
       flash[:notice] = 'Post Updated'
       redirect_to admin_posts_path
@@ -36,12 +46,16 @@ class Admin::PostsController < Admin::ApplicationController
   end
 
   def index
-    @posts = Post.all
+    if params[:search]
+      @posts = Post.search(params[:search]).all.order('created_at DESC').paginate(:per_page => 10, :page => params[:page])
+    else
+      @posts = Post.all.order('created_at DESC').paginate(:per_page => 10, :page => params[:page])
+    end
   end
 
 
   private
-    def post_params
-      params.require(:post).permit(:title, :category_id, :user_id, :tags, :image, :body)
-    end
+  def post_params
+    params.require(:post).permit(:title, :category_id, :user_id, :tags, :image, :body)
   end
+end

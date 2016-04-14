@@ -1,52 +1,23 @@
-<div class="row">
-                        <div class="col-md-6">
-                            <div class="post">
-                                <img src="images/funny_cat.jpg">
-                                <div class="post-content">
-                                    <h3>lorem ipsum</h3>
-                                    <small>Posted by Delante on January 1, 2016</small>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit rem sint, est facilis minus, ab molestiae sunt in nobis. Magni delectus iure rem? Animi atque sapiente ab voluptatibus, quisquam fugiat? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam sint itaque optio enim quod a at sit assumenda adipisci excepturi minima, ipsum rerum ullam ipsam fugit unde magni mollitia velit.
-                                    </p>
-                                    <a class="btn btn-primary btn-block">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="post">
-                                <img src="images/funny_cat.jpg">
-                                <div class="post-content">
-                                    <h3>lorem ipsum</h3>
-                                    <small>Posted by Delante on January 1, 2016</small>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit rem sint, est facilis minus, ab molestiae sunt in nobis. Magni delectus iure rem? Animi atque sapiente ab voluptatibus, quisquam fugiat? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam sint itaque optio enim quod a at sit assumenda adipisci excepturi minima, ipsum rerum ullam ipsam fugit unde magni mollitia velit.
-                                    </p>
-                                    <a class="btn btn-primary btn-block">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="post">
-                                <img src="images/funny_cat.jpg">
-                                <div class="post-content">
-                                    <h3>lorem ipsum</h3>
-                                    <small>Posted by Delante on January 1, 2016</small>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit rem sint, est facilis minus, ab molestiae sunt in nobis. Magni delectus iure rem? Animi atque sapiente ab voluptatibus, quisquam fugiat? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam sint itaque optio enim quod a at sit assumenda adipisci excepturi minima, ipsum rerum ullam ipsam fugit unde magni mollitia velit.
-                                    </p>
-                                    <a class="btn btn-primary btn-block">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="post">
-                                <img src="images/funny_cat.jpg">
-                                <div class="post-content">
-                                    <h3>lorem ipsum</h3>
-                                    <small>Posted by Delante on January 1, 2016</small>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit rem sint, est facilis minus, ab molestiae sunt in nobis. Magni delectus iure rem? Animi atque sapiente ab voluptatibus, quisquam fugiat? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam sint itaque optio enim quod a at sit assumenda adipisci excepturi minima, ipsum rerum ullam ipsam fugit unde magni mollitia velit.
-                                    </p>
-                                    <a class="btn btn-primary btn-block">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<div id = "posts-index">
+  <% if @posts.exists? %>
+    <% @posts.each_slice(2) do |post| %>
+      <div class="row">
+        <% post.each do |post| %>
+          <div class="col-md-6">
+            <div class="post">
+              <%= image_tag post.image.url, width:'100%' %>
+                <div class="post-content">
+                  <h3><%= post.title %></h3>
+           <small>Posted by <%= post.user.name %> on <%= post.created_at.to_time.strftime('%B %e at %l:%M %p') %></small>
+                  <%= raw post.body.truncate(200) %>
+                  <%= link_to "Read More", post_path(post), class:'btn btn-primary' %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+    <p>No posts yet</p>
+  <% end %>
+</div>

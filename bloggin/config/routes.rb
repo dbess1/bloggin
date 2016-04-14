@@ -114,8 +114,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :posts, :categories, :comments, :users
-
-
   end
 
   root 'posts#index'
