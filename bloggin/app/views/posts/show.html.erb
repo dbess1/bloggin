@@ -1,2 +1,7 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<div class="well post-single">
+<h2 class="page-header"><%= @post.title %></h2>
+<%= image_tag @post.image.url, width: '100%' %>
+<%= raw @post.body %>
+</div>
+
+<%= render 'partials/comments' %>

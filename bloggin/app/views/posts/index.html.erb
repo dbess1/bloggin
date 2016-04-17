@@ -8,7 +8,7 @@
               <%= image_tag post.image.url, width:'100%' %>
                 <div class="post-content">
                   <h3><%= post.title %></h3>
-           <small>Posted by <%= post.user.name %> on <%= post.created_at.to_time.strftime('%B %e at %l:%M %p') %></small>
+                  
                   <%= raw post.body.truncate(200) %>
                   <%= link_to "Read More", post_path(post), class:'btn btn-primary' %>
                   </div>

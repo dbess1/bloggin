@@ -7,7 +7,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-this is the BACKEND
 
 <head>
     <meta charset="utf-8">
@@ -55,6 +54,17 @@ this is the BACKEND
             <div class="row">
                 <div class="col-md-12">
 <div class="well">
+
+<div id="user_nav" class="pull-right">
+<% if current_user %>
+Logged in as <%= current_user.email %>
+<%= link_to "Log Out", admin_logout_path %>
+<% else %>
+<%= link_to "Log-In", admin_login_path %>
+<% end %>
+</div>
+<div class="clearfix"></div>
+<!-- Alerts & Messages -->
 <%if flash[:notice] %>
 <div class="alert alert-success"><%= flash[:notice] %></div>
 <% end %>
