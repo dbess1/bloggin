@@ -95,6 +95,7 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
     pg (0.17.1)
+    puma (3.4.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -186,6 +187,7 @@ DEPENDENCIES
   mail_form
   paperclip (~> 4.2)
   pg (= 0.17.1)
+  puma
   rails (= 4.2.5.1)
   rails_12factor (= 0.0.2)
   sass-rails (~> 5.0)
